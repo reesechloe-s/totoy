@@ -1,0 +1,52 @@
+[gd_scene format=3 uid="uid://n1fvnav20d7w"]
+
+[ext_resource type="Script" uid="uid://ds6rl6j5wl32y" path="res://scripts/desktop_manager.gd" id="1_2nepw"]
+[ext_resource type="Script" uid="uid://clogwkebgpb61" path="res://scripts/suriin_tool.gd" id="2_uyncw"]
+
+[node name="DesktopRoot" type="Control" unique_id=241140268]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_2nepw")
+
+[node name="Wallpaper" type="TextureRect" parent="." unique_id=2028785025]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Taskbar" type="Panel" parent="." unique_id=803011391]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="StartButton" type="Button" parent="Taskbar" unique_id=1009030849]
+layout_mode = 0
+offset_right = 8.0
+offset_bottom = 8.0
+
+[node name="BrowserArea" type="Control" parent="." unique_id=398840833]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="FeedScroll" type="ScrollContainer" parent="BrowserArea" unique_id=392652182]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="FeedVBox" type="VBoxContainer" parent="BrowserArea/FeedScroll" unique_id=873065430]
+layout_mode = 2
+
+[node name="SuriinTool" type="TextureButton" parent="." unique_id=1344227744]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("2_uyncw")
+
+[node name="PopupSpawnArea" type="Control" parent="." unique_id=866533914]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0

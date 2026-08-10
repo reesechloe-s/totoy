@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://ds6rl6j5wl32y" path="res://scripts/desktop_manager.gd" id="1_2nepw"]
 [ext_resource type="Script" uid="uid://clogwkebgpb61" path="res://scripts/suriin_tool.gd" id="2_uyncw"]
+[ext_resource type="Texture2D" uid="uid://cay2rdklptjt2" path="res://assets/art/bg/desktop_wallpaper.png" id="2_yw0nm"]
 
 [node name="DesktopRoot" type="Control" unique_id=241140268]
 layout_mode = 3
@@ -13,9 +14,14 @@ grow_vertical = 2
 script = ExtResource("1_2nepw")
 
 [node name="Wallpaper" type="TextureRect" parent="." unique_id=2028785025]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_yw0nm")
+expand_mode = 1
 
 [node name="Taskbar" type="Panel" parent="." unique_id=803011391]
 layout_mode = 0

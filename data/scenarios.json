@@ -2,175 +2,175 @@
   "schema_version": 2,
   "_comment": "TOTOY scenario data. Contains Levels 1-4 definitions to show curriculum scope, but scenarios are trimmed to just Level 1 for the pitch demo.",
   "reward_defaults": {
-    "correct_barya": 10,
-    "correct_time": 15,
-    "wrong_barya": 0,
-    "wrong_time": -30
+	"correct_barya": 10,
+	"correct_time": 15,
+	"wrong_barya": 0,
+	"wrong_time": -30
   },
   "levels": [
-    {
-      "id": 1,
-      "rank": "Sisiw",
-      "display_name": "Level 1 - Sisiw (Easy)",
-      "unlocked": true,
-      "locked_message": "",
-      "piso_time": 300,
-      "first_spawn_delay": 1.5,
-      "spawn_interval": 2.0,
-      "focus": "Basic phishing popups, suspicious ad banners, fake GCash claim links.",
-      "mil_themes": ["Phishing", "Malvertising", "URL Literacy"]
-    },
-    {
-      "id": 2,
-      "rank": "Suki ng Pisonet",
-      "display_name": "Level 2 - Suki (Normal)",
-      "unlocked": false,
-      "locked_message": "Beat the Sisiw level to unlock this, Totoy!",
-      "piso_time": 240,
-      "first_spawn_delay": 1.0,
-      "spawn_interval": 1.2,
-      "focus": "Free game cheat executables, fake news chain posts, account-sharing traps.",
-      "mil_themes": ["Malware", "Misinformation", "Social Engineering"]
-    },
-    {
-      "id": 3,
-      "rank": "Challenger",
-      "display_name": "Level 3 - Challenger (Hard)",
-      "unlocked": false,
-      "locked_message": "You need to finish the Suki level first, Totoy!",
-      "piso_time": 180,
-      "first_spawn_delay": 1.0,
-      "spawn_interval": 1.0,
-      "focus": "Multi-step verification, deepfakes, e-commerce bot reviews.",
-      "mil_themes": ["Deepfakes", "Verification", "Review Manipulation"]
-    },
-    {
-      "id": 4,
-      "rank": "Bantay ng Comshop",
-      "display_name": "Level 4 - Bantay (Expert)",
-      "unlocked": false,
-      "locked_message": "Beat the Challenger level first to help manage the shop!",
-      "piso_time": 180,
-      "first_spawn_delay": 1.0,
-      "spawn_interval": 0.8,
-      "focus": "Public PC session auto-fill hijacks, ransomware scripts, spoofed HTTPS.",
-      "mil_themes": ["Public PC Safety", "Ransomware", "Spoofed HTTPS"]
-    }
+	{
+	  "id": 1,
+	  "rank": "Sisiw",
+	  "display_name": "Level 1 - Sisiw (Easy)",
+	  "unlocked": true,
+	  "locked_message": "",
+	  "piso_time": 300,
+	  "first_spawn_delay": 1.5,
+	  "spawn_interval": 2.0,
+	  "focus": "Basic phishing popups, suspicious ad banners, fake GCash claim links.",
+	  "mil_themes": ["Phishing", "Malvertising", "URL Literacy"]
+	},
+	{
+	  "id": 2,
+	  "rank": "Suki ng Pisonet",
+	  "display_name": "Level 2 - Suki (Normal)",
+	  "unlocked": false,
+	  "locked_message": "Beat the Sisiw level to unlock this, Totoy!",
+	  "piso_time": 240,
+	  "first_spawn_delay": 1.0,
+	  "spawn_interval": 1.2,
+	  "focus": "Free game cheat executables, fake news chain posts, account-sharing traps.",
+	  "mil_themes": ["Malware", "Misinformation", "Social Engineering"]
+	},
+	{
+	  "id": 3,
+	  "rank": "Challenger",
+	  "display_name": "Level 3 - Challenger (Hard)",
+	  "unlocked": false,
+	  "locked_message": "You need to finish the Suki level first, Totoy!",
+	  "piso_time": 180,
+	  "first_spawn_delay": 1.0,
+	  "spawn_interval": 1.0,
+	  "focus": "Multi-step verification, deepfakes, e-commerce bot reviews.",
+	  "mil_themes": ["Deepfakes", "Verification", "Review Manipulation"]
+	},
+	{
+	  "id": 4,
+	  "rank": "Bantay ng Comshop",
+	  "display_name": "Level 4 - Bantay (Expert)",
+	  "unlocked": false,
+	  "locked_message": "Beat the Challenger level first to help manage the shop!",
+	  "piso_time": 180,
+	  "first_spawn_delay": 1.0,
+	  "spawn_interval": 0.8,
+	  "focus": "Public PC session auto-fill hijacks, ransomware scripts, spoofed HTTPS.",
+	  "mil_themes": ["Public PC Safety", "Ransomware", "Spoofed HTTPS"]
+	}
   ],
   "scenarios": [
-    {
-      "id": "l1_nokia_scam",
-      "level": 1,
-      "order": 1,
-      "window_type": "static_image",
-      "image_path": "res://assets/art/ui/image_6f3d18.png",
-      "ambient": {
-        "speaker": "Kid at Unit 4",
-        "speech_bubble": "Uy Totoy! Panalo ka daw! 1 millionth visitor ka oh!",
-        "subtitle": "Hey Totoy! It says you won! You're the 1 millionth visitor!"
-      },
-      "close_button_choice": "isara",
-      "suriin": {
-        "summary": "Why is a random website giving away a phone and internet credits?",
-        "highlight": "1,000,000th visitor",
-        "clues": [
-          {
-            "label": "Oldest Trick",
-            "value": "1,000,000th visitor",
-            "note": "This is a classic internet scam template. Real websites do not track random visitors to give out expensive prizes."
-          },
-          {
-            "label": "Data Harvesting",
-            "value": "Name, Email, Cellphone",
-            "note": "They don't want to give you a prize; they want your personal information to send you spam or sell it to other scammers."
-          }
-        ]
-      },
-      "choices": [
-        {
-          "id": "ilagay_info",
-          "text": "Type in your name and number to claim the prize",
-          "is_correct": false,
-          "outcome": {
-            "barya": 0,
-            "time": -30,
-            "totoy_state": "shocked",
-            "kuya_title": "Watch out, Totoy!",
-            "kuya_tip": "That's a data harvesting scam! They just want to collect your full name, email, and phone number. The '1,000,000th visitor' is one of the oldest tricks on the internet.",
-            "mil_principle": "Data Privacy / Phishing"
-          }
-        },
-        {
-          "id": "isara",
-          "text": "Close the window and ignore the fake prize",
-          "is_correct": true,
-          "outcome": {
-            "barya": 10,
-            "time": 15,
-            "totoy_state": "happy",
-            "kuya_title": "Good job, Totoy!",
-            "kuya_tip": "Nice save! If a random pop-up asks for your personal information in exchange for a 'free prize', you are the product. [b]Never give your data to unverified sites.[/b]",
-            "mil_principle": "Data Privacy"
-          }
-        }
-      ]
-    },
-    {
-      "id": "l1_virus_ad",
-      "level": 1,
-      "order": 2,
-      "window_type": "static_image",
-      "image_path": "res://assets/art/ui/image_6f3d1a.png",
-      "ambient": {
-        "speaker": "Kid at next PC",
-        "speech_bubble": "Totoy, i-download mo na 'yan! Baka masira 'yang PC, singilin ka pa ni Kuya!",
-        "subtitle": "Totoy, you better download that! If you break the PC, Kuya will make you pay for it!"
-      },
-      "close_button_choice": "isara_tama",
-      "suriin": {
-        "summary": "How can a random website know what is inside this computer?",
-        "highlight": "AntiVirus Pro 2004",
-        "clues": [
-          {
-            "label": "Impossible Tech",
-            "value": "Website scan",
-            "note": "A web page cannot scan your local hard drive. The virus alert is just a scare tactic."
-          },
-          {
-            "label": "File Type",
-            "value": "Automatic Download",
-            "note": "Clicking 'Install FREE' downloads an executable program. If you run it, it takes control of the PC."
-          }
-        ]
-      },
-      "choices": [
-        {
-          "id": "download",
-          "text": "Click 'Install FREE' to clean the viruses",
-          "is_correct": false,
-          "outcome": {
-            "barya": 0,
-            "time": -30,
-            "totoy_state": "shocked",
-            "kuya_title": "Uh oh, Totoy!",
-            "kuya_tip": "That's scareware! They scare you with fake virus alerts so you willingly install their malware. The truth: [b]no website can scan your computer[/b].",
-            "mil_principle": "Scareware / Malvertising"
-          }
-        },
-        {
-          "id": "isara_tama",
-          "text": "Close the entire window via the top title bar",
-          "is_correct": true,
-          "outcome": {
-            "barya": 10,
-            "time": 15,
-            "totoy_state": "happy",
-            "kuya_title": "Nice one, Totoy!",
-            "kuya_tip": "Correct! You closed it from the outer title bar, not the fake ad buttons. Remember: on a public PisoNet PC, [b]never install random software[/b].",
-            "mil_principle": "Public PC Safety"
-          }
-        }
-      ]
-    }
+	{
+	  "id": "l1_nokia_scam",
+	  "level": 1,
+	  "order": 1,
+	  "window_type": "static_image",
+	  "image_path": "res://assets/art/ui/image_6f3d18.png",
+	  "ambient": {
+		"speaker": "Kid at Unit 4",
+		"speech_bubble": "Uy Totoy! Panalo ka daw! 1 millionth visitor ka oh!",
+		"subtitle": "Hey Totoy! It says you won! You're the 1 millionth visitor!"
+	  },
+	  "close_button_choice": "isara",
+	  "suriin": {
+		"summary": "Why is a random website giving away a phone and internet credits?",
+		"highlight": "1,000,000th visitor",
+		"clues": [
+		  {
+			"label": "Oldest Trick",
+			"value": "1,000,000th visitor",
+			"note": "This is a classic internet scam template. Real websites do not track random visitors to give out expensive prizes."
+		  },
+		  {
+			"label": "Data Harvesting",
+			"value": "Name, Email, Cellphone",
+			"note": "They don't want to give you a prize; they want your personal information to send you spam or sell it to other scammers."
+		  }
+		]
+	  },
+	  "choices": [
+		{
+		  "id": "ilagay_info",
+		  "text": "Type in your name and number to claim the prize",
+		  "is_correct": false,
+		  "outcome": {
+			"barya": 0,
+			"time": -30,
+			"totoy_state": "shocked",
+			"kuya_title": "Watch out, Totoy!",
+			"kuya_tip": "That's a data harvesting scam! They just want to collect your full name, email, and phone number. The '1,000,000th visitor' is one of the oldest tricks on the internet.",
+			"mil_principle": "Data Privacy / Phishing"
+		  }
+		},
+		{
+		  "id": "isara",
+		  "text": "Close the window and ignore the fake prize",
+		  "is_correct": true,
+		  "outcome": {
+			"barya": 10,
+			"time": 15,
+			"totoy_state": "happy",
+			"kuya_title": "Good job, Totoy!",
+			"kuya_tip": "Nice save! If a random pop-up asks for your personal information in exchange for a 'free prize', you are the product. [b]Never give your data to unverified sites.[/b]",
+			"mil_principle": "Data Privacy"
+		  }
+		}
+	  ]
+	},
+	{
+	  "id": "l1_virus_ad",
+	  "level": 1,
+	  "order": 2,
+	  "window_type": "static_image",
+	  "image_path": "res://assets/art/ui/image_6f3d1a.png",
+	  "ambient": {
+		"speaker": "Kid at next PC",
+		"speech_bubble": "Totoy, i-download mo na 'yan! Baka masira 'yang PC, singilin ka pa ni Kuya!",
+		"subtitle": "Totoy, you better download that! If you break the PC, Kuya will make you pay for it!"
+	  },
+	  "close_button_choice": "isara_tama",
+	  "suriin": {
+		"summary": "How can a random website know what is inside this computer?",
+		"highlight": "AntiVirus Pro 2004",
+		"clues": [
+		  {
+			"label": "Impossible Tech",
+			"value": "Website scan",
+			"note": "A web page cannot scan your local hard drive. The virus alert is just a scare tactic."
+		  },
+		  {
+			"label": "File Type",
+			"value": "Automatic Download",
+			"note": "Clicking 'Install FREE' downloads an executable program. If you run it, it takes control of the PC."
+		  }
+		]
+	  },
+	  "choices": [
+		{
+		  "id": "download",
+		  "text": "Click 'Install FREE' to clean the viruses",
+		  "is_correct": false,
+		  "outcome": {
+			"barya": 0,
+			"time": -30,
+			"totoy_state": "shocked",
+			"kuya_title": "Uh oh, Totoy!",
+			"kuya_tip": "That's scareware! They scare you with fake virus alerts so you willingly install their malware. The truth: [b]no website can scan your computer[/b].",
+			"mil_principle": "Scareware / Malvertising"
+		  }
+		},
+		{
+		  "id": "isara_tama",
+		  "text": "Close the entire window via the top title bar",
+		  "is_correct": true,
+		  "outcome": {
+			"barya": 10,
+			"time": 15,
+			"totoy_state": "happy",
+			"kuya_title": "Nice one, Totoy!",
+			"kuya_tip": "Correct! You closed it from the outer title bar, not the fake ad buttons. Remember: on a public PisoNet PC, [b]never install random software[/b].",
+			"mil_principle": "Public PC Safety"
+		  }
+		}
+	  ]
+	}
   ]
 }

@@ -45,4 +45,10 @@ func is_level_unlocked(level_id: int) -> bool:
 func unlock_level(level_id: int) -> void:
 	unlocked_levels[level_id] = true
 
-# gacha_cards
+# gacha_cards inventory for album.tscn
+func has_card(card_id: String) -> bool:
+    return unlocked_cards.has(card_id)
+
+func unlock_card(card_id: String) -> void:
+    if not unlocked_cards.has(card_id):
+        unlocked_cards.append(card_id)

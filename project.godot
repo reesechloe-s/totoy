@@ -11,7 +11,13 @@ config_version=5
 [application]
 
 config/name="Totoy"
+run/main_scene="uid://ckmdfuy8ff3dx"
 config/features=PackedStringArray("4.7", "Forward Plus")
+
+[autoload]
+
+JsonLoader="*uid://1o8p4bytbf2a"
+GlobalData="*uid://cyl8tw7gob7ex"
 
 [display]
 

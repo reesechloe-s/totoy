@@ -1,6 +1,8 @@
 [gd_scene format=3 uid="uid://dl5lndel5kh6k"]
 
 [ext_resource type="Script" uid="uid://3r18bn80jgb8" path="res://scripts/main_menu.gd" id="1_t5xhh"]
+[ext_resource type="Texture2D" uid="uid://3oxo7cvv4kmd" path="res://assets/art/game-opening-scene.png" id="2_pnn0r"]
+[ext_resource type="Texture2D" uid="uid://den1kq5ssguyx" path="res://assets/art/press-to-play-button.png" id="3_qfenj"]
 
 [node name="OpeningMenu" type="Control" unique_id=567547578]
 layout_mode = 3
@@ -10,21 +12,19 @@ offset_bottom = 40.0
 script = ExtResource("1_t5xhh")
 
 [node name="Background" type="TextureRect" parent="." unique_id=1387162986]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_pnn0r")
+stretch_mode = 5
 
-[node name="TitleArt" type="TextureRect" parent="." unique_id=2075633213]
+[node name="StartButton" type="TextureButton" parent="." unique_id=695469278]
 layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
-
-[node name="StartButton" type="Button" parent="." unique_id=378689256]
-layout_mode = 0
-offset_right = 8.0
-offset_bottom = 8.0
-
-[node name="PromptLabel" type="Label" parent="." unique_id=257708269]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 23.0
+offset_left = -280.0
+offset_top = 304.0
+offset_right = 329.0
+offset_bottom = 364.0
+texture_normal = ExtResource("3_qfenj")

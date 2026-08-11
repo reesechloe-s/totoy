@@ -1,8 +1,11 @@
 [gd_scene format=3 uid="uid://ckmdfuy8ff3dx"]
 
+[ext_resource type="Texture2D" uid="uid://dk15ice8c2oac" path="res://assets/art/bg/pisonet_shop_bg.png" id="1_1u5st"]
+
 [node name="MainGame" type="Node2D" unique_id=239025680]
 
 [node name="ShopBackground" type="Sprite2D" parent="." unique_id=1850050833]
+texture = ExtResource("1_1u5st")
 
 [node name="PeerKidsLayer" type="Node2D" parent="." unique_id=2029742438]
 

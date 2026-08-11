@@ -3,32 +3,33 @@ extends Control
 
 # Signal emitted to notify UI to show the reveal animation
 signal card_pulled(card_data)
+# Signal emitted when the player is done browsing the store (Option B routing)
+signal shopping_done
 
 const PACK_COST: int = 20
 
 @onready var blind_pack_button: TextureButton = $BlindPackButton
 @onready var card_display_panel: Panel = $CardDisplayPanel
+@onready var card_image: TextureRect = $CardDisplayPanel/CardImage
 @onready var card_title: Label = $CardDisplayPanel/CardTitle
 @onready var rarity_label: Label = $CardDisplayPanel/RarityLabel
-@onready var close_button: Button = $CardDisplayPanel/CloseButton
+@onready var lore_text: RichTextLabel = $CardDisplayPanel/LoreText
+@onready var close_button: Button = $CloseButton
+@onready var done_button: Button = get_node_or_null("DoneButton")
 
-
-# List of 6 MVP cards with rarity weights
-# Common: 50% combined, Rare: 35% combined, Super Rare: 12%, SSR: 3%
-# TODO: swap this for JsonLoader.get_all_gacha_cards() once data/gacha_cards.json is filled in
-var card_pool: Array = [
-	{"id": "piattos", "name": "Piattos Cheese", "rarity": "Common", "weight": 25},
-	{"id": "chippy", "name": "Chippy Red", "rarity": "Common", "weight": 25},
-	{"id": "mountain_dew", "name": "Mountain Dew", "rarity": "Rare", "weight": 18},
-	{"id": "ice_candy", "name": "Ice Candy", "rarity": "Rare", "weight": 17},
-	{"id": "piso_string", "name": "Piso with String", "rarity": "Super Rare", "weight": 12},
-	{"id": "a4tech_mouse", "name": "A4Tech Ball Mouse", "rarity": "SSR", "weight": 3}
-]
+# Loaded from res://data/gacha_cards.json (schema: {"cards": [{id, name, rarity, weight, ...}]})
+var card_pool: Array = []
 
 func _ready() -> void:
+	card_pool = JsonLoader.get_all_gacha_cards().get("cards", [])
 	blind_pack_button.pressed.connect(_on_blind_pack_pressed)
 	close_button.pressed.connect(_on_close_pressed)
 	card_display_panel.visible = false
+	# Card art is fully baked (name/rarity/flavor text drawn in by the artist),
+	# so these overlay nodes stay hidden to avoid double-rendering text on the image.
+	card_title.visible = false
+	rarity_label.visible = false
+	lore_text.visible = false
 	if done_button:
 		done_button.pressed.connect(_on_done_pressed)
 
@@ -43,8 +44,9 @@ func buy_pack() -> bool:
 	var pulled_card: Dictionary = _roll_random_card()
 	GlobalData.unlock_card(pulled_card["id"])
 
-	card_title.text = pulled_card["name"]
-	rarity_label.text = pulled_card["rarity"]
+	# name/rarity/flavor_text are baked into the card art itself; only the image is rendered here.
+	if pulled_card.has("image_path"):
+		card_image.texture = load(pulled_card["image_path"])
 	card_display_panel.visible = true
 
 	card_pulled.emit(pulled_card)

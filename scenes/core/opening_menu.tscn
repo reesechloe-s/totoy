@@ -1,0 +1,30 @@
+[gd_scene format=3 uid="uid://dl5lndel5kh6k"]
+
+[ext_resource type="Script" uid="uid://3r18bn80jgb8" path="res://scripts/main_menu.gd" id="1_t5xhh"]
+
+[node name="OpeningMenu" type="Control" unique_id=567547578]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_t5xhh")
+
+[node name="Background" type="TextureRect" parent="." unique_id=1387162986]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="TitleArt" type="TextureRect" parent="." unique_id=2075633213]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="StartButton" type="Button" parent="." unique_id=378689256]
+layout_mode = 0
+offset_right = 8.0
+offset_bottom = 8.0
+
+[node name="PromptLabel" type="Label" parent="." unique_id=257708269]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0

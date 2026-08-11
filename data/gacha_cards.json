@@ -3,65 +3,65 @@
   "_comment": "TOTOY Sari-Sari Blind Pack card pool (MVP: 6 cards). Weights sum to 100 and map to Common 50% / Rare 35% / Super Rare 12% / SSR 3% per the PRD.",
   "pack_cost": 20,
   "cards": [
-    {
-      "id": "piattos",
-      "name": "Piattos Cheese",
-      "rarity": "Common",
-      "weight": 25,
-      "image_path": "res://assets/art/cards/card_silhouette.png",
-      "subtitle": "Baon Classic",
-      "flavor_text": "Isang kagat, sarap na sarap - pero 'wag kalimutan: tingnan muna ang URL bago mag-log in, kahit gutom ka na sa oras.",
-      "mil_principle": "URL Literacy"
-    },
-    {
-      "id": "chippy",
-      "name": "Chippy Red",
-      "rarity": "Common",
-      "weight": 25,
-      "image_path": "res://assets/art/cards/card_silhouette.png",
-      "subtitle": "Manas na Manas",
-      "flavor_text": "Maanghang siya, pero simple lang ang aral: kapag may nangangakong libreng premyo online, mag-alinlangan muna.",
-      "mil_principle": "Scam Awareness"
-    },
-    {
-      "id": "mountain_dew",
-      "name": "Mountain Dew",
-      "rarity": "Rare",
-      "weight": 18,
-      "image_path": "res://assets/art/cards/card_silhouette.png",
-      "subtitle": "Sikreto ng Energy",
-      "flavor_text": "Parang free game cheat na ipinangako ng kaklase - sarap sa tenga, pero puwedeng magpasira sa PC mo.",
-      "mil_principle": "Malware Awareness"
-    },
-    {
-      "id": "ice_candy",
-      "name": "Ice Candy",
-      "rarity": "Rare",
-      "weight": 17,
-      "image_path": "res://assets/art/cards/card_silhouette.png",
-      "subtitle": "5 Pesos Lang",
-      "flavor_text": "Kahit mura at mabilis, hindi lahat ng balita dapat paniwalaan agad - suriin muna bago mag-share.",
-      "mil_principle": "Misinformation Check"
-    },
-    {
-      "id": "piso_string",
-      "name": "Piso with String",
-      "rarity": "Super Rare",
-      "weight": 12,
-      "image_path": "res://assets/art/cards/card_silhouette.png",
-      "subtitle": "Old Pisonet Trick",
-      "flavor_text": "Klasikong gimik ng mga suki noon - pero sa totoong buhay, huwag kailanman ibahagi ang password mo kahit kanino.",
-      "mil_principle": "Account Security"
-    },
-    {
-      "id": "a4tech_mouse",
-      "name": "A4Tech Ball Mouse",
-      "rarity": "SSR",
-      "weight": 3,
-      "image_path": "res://assets/art/cards/card_silhouette.png",
-      "subtitle": "Glowing Ball Mouse",
-      "flavor_text": "Linisin ang rubber ball sa loob para +100% ang aim mo. Keep system clean!",
-      "mil_principle": "System Hygiene / Public PC Safety"
-    }
+	{
+	  "id": "piattos",
+	  "name": "Piattos Cheese",
+	  "rarity": "Common",
+	  "weight": 25,
+	  "image_path": "res://assets/art/cards/card_silhouette.png",
+	  "subtitle": "Baon Classic",
+	  "flavor_text": "Isang kagat, sarap na sarap - pero 'wag kalimutan: tingnan muna ang URL bago mag-log in, kahit gutom ka na sa oras.",
+	  "mil_principle": "URL Literacy"
+	},
+	{
+	  "id": "chippy",
+	  "name": "Chippy Red",
+	  "rarity": "Common",
+	  "weight": 25,
+	  "image_path": "res://assets/art/cards/card_silhouette.png",
+	  "subtitle": "Manas na Manas",
+	  "flavor_text": "Maanghang siya, pero simple lang ang aral: kapag may nangangakong libreng premyo online, mag-alinlangan muna.",
+	  "mil_principle": "Scam Awareness"
+	},
+	{
+	  "id": "mountain_dew",
+	  "name": "Mountain Dew",
+	  "rarity": "Rare",
+	  "weight": 18,
+	  "image_path": "res://assets/art/cards/card_silhouette.png",
+	  "subtitle": "Sikreto ng Energy",
+	  "flavor_text": "Parang free game cheat na ipinangako ng kaklase - sarap sa tenga, pero puwedeng magpasira sa PC mo.",
+	  "mil_principle": "Malware Awareness"
+	},
+	{
+	  "id": "ice_candy",
+	  "name": "Ice Candy",
+	  "rarity": "Rare",
+	  "weight": 17,
+	  "image_path": "res://assets/art/cards/card_silhouette.png",
+	  "subtitle": "5 Pesos Lang",
+	  "flavor_text": "Kahit mura at mabilis, hindi lahat ng balita dapat paniwalaan agad - suriin muna bago mag-share.",
+	  "mil_principle": "Misinformation Check"
+	},
+	{
+	  "id": "piso_string",
+	  "name": "Piso with String",
+	  "rarity": "Super Rare",
+	  "weight": 12,
+	  "image_path": "res://assets/art/cards/card_silhouette.png",
+	  "subtitle": "Old Pisonet Trick",
+	  "flavor_text": "Klasikong gimik ng mga suki noon - pero sa totoong buhay, huwag kailanman ibahagi ang password mo kahit kanino.",
+	  "mil_principle": "Account Security"
+	},
+	{
+	  "id": "a4tech_mouse",
+	  "name": "A4Tech Ball Mouse",
+	  "rarity": "SSR",
+	  "weight": 3,
+	  "image_path": "res://assets/art/cards/card_silhouette.png",
+	  "subtitle": "Glowing Ball Mouse",
+	  "flavor_text": "Linisin ang rubber ball sa loob para +100% ang aim mo. Keep system clean!",
+	  "mil_principle": "System Hygiene / Public PC Safety"
+	}
   ]
 }

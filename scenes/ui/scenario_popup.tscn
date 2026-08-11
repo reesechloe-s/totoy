@@ -1,0 +1,30 @@
+[gd_scene format=3 uid="uid://c7pdobwkvoku"]
+
+[ext_resource type="Script" uid="uid://kyr4sjvftgbh" path="res://scripts/popup_controller.gd" id="1_8e4au"]
+
+[node name="PopupRoot" type="PanelContainer" unique_id=960634216]
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_8e4au")
+
+[node name="VBox" type="VBoxContainer" parent="." unique_id=500524861]
+layout_mode = 2
+
+[node name="TitleLabel" type="Label" parent="VBox" unique_id=982835623]
+layout_mode = 2
+
+[node name="ContentBody" type="RichTextLabel" parent="VBox" unique_id=978538906]
+layout_mode = 2
+
+[node name="InspectDetailsLabel" type="Label" parent="VBox" unique_id=781280880]
+visible = false
+layout_mode = 2
+
+[node name="ChoiceHBox" type="HBoxContainer" parent="VBox" unique_id=258861552]
+layout_mode = 2
+
+[node name="Option1Btn" type="Button" parent="VBox/ChoiceHBox" unique_id=1439137403]
+layout_mode = 2
+
+[node name="Option2Btn" type="Button" parent="VBox/ChoiceHBox" unique_id=1688301108]
+layout_mode = 2

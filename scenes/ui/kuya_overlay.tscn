@@ -1,0 +1,42 @@
+[gd_scene format=3 uid="uid://b8o0pj463aldv"]
+
+[ext_resource type="Script" uid="uid://di70lpyun5f12" path="res://scripts/kuya_overlay_controller.gd" id="1_gy27m"]
+
+[node name="KuyaOverlay" type="Control" unique_id=288496870]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_gy27m")
+
+[node name="DimmerBG" type="ColorRect" parent="." unique_id=1881119908]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="KuyaTexture" type="TextureRect" parent="." unique_id=1120147430]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="DialogPanel" type="Panel" parent="." unique_id=2027366172]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="HeaderLabel" type="Label" parent="DialogPanel" unique_id=1161645159]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+
+[node name="MILTipText" type="RichTextLabel" parent="DialogPanel" unique_id=402443965]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="ContinueButton" type="Button" parent="DialogPanel" unique_id=1752012931]
+layout_mode = 0
+offset_right = 8.0
+offset_bottom = 8.0

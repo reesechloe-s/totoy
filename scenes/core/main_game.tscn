@@ -1,3 +1,51 @@
 [gd_scene format=3 uid="uid://ckmdfuy8ff3dx"]
 
 [node name="MainGame" type="Node2D" unique_id=239025680]
+
+[node name="ShopBackground" type="Sprite2D" parent="." unique_id=1850050833]
+
+[node name="PeerKidsLayer" type="Node2D" parent="." unique_id=2029742438]
+
+[node name="KidLeft" type="Sprite2D" parent="PeerKidsLayer" unique_id=1748827414]
+
+[node name="KidRight" type="Sprite2D" parent="PeerKidsLayer" unique_id=908922407]
+
+[node name="TotoySprite" type="Sprite2D" parent="." unique_id=1379429332]
+
+[node name="ShopAudioPlayer" type="AudioStreamPlayer" parent="." unique_id=1325361819]
+
+[node name="UILayer" type="CanvasLayer" parent="." unique_id=2137738966]
+
+[node name="MonitorBezel" type="TextureRect" parent="UILayer" unique_id=463699640]
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="PisoTimerLabel" type="Label" parent="UILayer/MonitorBezel" unique_id=291493921]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+
+[node name="BaryaCountLabel" type="Label" parent="UILayer/MonitorBezel" unique_id=1839350404]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+
+[node name="DesktopInstance" type="Control" parent="UILayer" unique_id=1860551724]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="OverlayLayer" type="CanvasLayer" parent="." unique_id=210081648]
+
+[node name="KuyaOverlayInstance" type="Control" parent="OverlayLayer" unique_id=675929926]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="GachaScreenInstance" type="Control" parent="OverlayLayer" unique_id=1265940754]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0

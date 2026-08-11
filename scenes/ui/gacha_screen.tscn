@@ -1,0 +1,57 @@
+[gd_scene format=3 uid="uid://dfdmuk3x1nm4a"]
+
+[ext_resource type="Script" uid="uid://bia5m7stlki7a" path="res://scripts/gacha_manager.gd" id="1_d8w5k"]
+[ext_resource type="Texture2D" uid="uid://ci6aqbrnj6i1d" path="res://assets/art/cards/blind_pack_closed.png" id="2_ggkqi"]
+[ext_resource type="Texture2D" uid="uid://gjh1t8il1gro" path="res://assets/art/cards/card_silhouette.png" id="3_yormm"]
+
+[node name="GachaRoot" type="Control" unique_id=2001560086]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_d8w5k")
+
+[node name="Background" type="ColorRect" parent="." unique_id=895669103]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="BlindPackButton" type="TextureButton" parent="." unique_id=1728256670]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture_normal = ExtResource("2_ggkqi")
+
+[node name="CardDisplayPanel" type="Panel" parent="." unique_id=621297624]
+visible = false
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="CardImage" type="TextureRect" parent="CardDisplayPanel" unique_id=1604002060]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("3_yormm")
+
+[node name="CardTitle" type="Label" parent="CardDisplayPanel" unique_id=1663212245]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+
+[node name="RarityLabel" type="Label" parent="CardDisplayPanel" unique_id=129049101]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+
+[node name="LoreText" type="RichTextLabel" parent="CardDisplayPanel" unique_id=344589125]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="CloseButton" type="Button" parent="." unique_id=2120098981]
+layout_mode = 0
+offset_right = 8.0
+offset_bottom = 8.0

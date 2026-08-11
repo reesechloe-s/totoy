@@ -5,7 +5,8 @@ extends Node2D
 @onready var barya_label: Label = $UILayer/MonitorBezel/BaryaCountLabel
 @onready var desktop: Control = $UILayer/DesktopInstance
 @onready var kuya_overlay: Control = $OverlayLayer/KuyaOverlayInstance
-@onready var gacha_screen: Control = $OverlayLayer/GachaScreenInstance
+@onready var gacha_screen: GachaManager = $OverlayLayer/GachaScreenInstance
+@onready var totoy_sprite: Sprite2D = $TotoySprite
 
 # end-of-level choice buttons — drag them in once added to the scene
 # (BaseButton so either a Button or a TextureButton can be assigned)
@@ -13,6 +14,7 @@ extends Node2D
 @export var store_coins_button: BaseButton
 
 var is_game_active: bool = true
+var is_timer_paused: bool = false
 var level_scenarios: Array = []
 var current_scenario_index: int = 0
 
@@ -25,6 +27,7 @@ func _ready() -> void:
 	level_scenarios = JsonLoader.get_level_scenarios(GlobalData.current_level_id)
 	desktop.scenario_completed.connect(_on_scenario_completed)
 	kuya_overlay.continue_pressed.connect(_on_kuya_continue)
+	gacha_screen.shopping_done.connect(_on_shopping_done)
 
 	if buy_cards_button:
 		buy_cards_button.visible = false
@@ -37,7 +40,7 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	if not is_game_active:
+	if not is_game_active or is_timer_paused:
 		return
 
 	if GlobalData.piso_timer > 0:
@@ -79,11 +82,25 @@ func _spawn_next_scenario() -> void:
 # desktop_manager calls this once a popup's choice is resolved
 func _on_scenario_completed(outcome_data: Dictionary) -> void:
 	current_scenario_index += 1
+	is_timer_paused = true
+	_apply_totoy_reaction(outcome_data)
 	kuya_overlay.show_feedback(outcome_data)
 
 # kuya_overlay_controller calls this once the player taps Continue
 func _on_kuya_continue() -> void:
+	is_timer_paused = false
 	_spawn_next_scenario()
+
+# swaps Totoy's expression once matching art exists in assets/art/totoy/
+func _apply_totoy_reaction(outcome_data: Dictionary) -> void:
+	var texture_path: String = "res://assets/art/totoy/totoy_%s.png" % outcome_data["totoy_state"]
+	if ResourceLoader.exists(texture_path):
+		totoy_sprite.texture = load(texture_path)
+
+# gacha_manager calls this once the player is done shopping
+func _on_shopping_done() -> void:
+	gacha_screen.visible = false
+	get_tree().change_scene_to_file("res://scenes/core/level_select.tscn")
 
 func trigger_level_complete() -> void:
 	is_game_active = false

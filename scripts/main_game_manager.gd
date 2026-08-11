@@ -1,28 +1,58 @@
-extends Node
+extends Node2D
 
-# Node References (Verify node names with your Integrator!)
-@onready var timer_label: Label = $PhysicalViewport/PisoTimerLabel 
-@onready var barya_label: Label = $PhysicalViewport/BaryaCountLabel
+# Node References — match main_game.tscn's real tree
+@onready var timer_label: Label = $UILayer/MonitorBezel/PisoTimerLabel
+@onready var barya_label: Label = $UILayer/MonitorBezel/BaryaCountLabel
+@onready var desktop: Control = $UILayer/DesktopInstance
+@onready var kuya_overlay: Control = $OverlayLayer/KuyaOverlayInstance
+@onready var gacha_screen: Control = $OverlayLayer/GachaScreenInstance
+
+# end-of-level choice buttons — drag them in once added to the scene
+# (BaseButton so either a Button or a TextureButton can be assigned)
+@export var buy_cards_button: BaseButton
+@export var store_coins_button: BaseButton
 
 var is_game_active: bool = true
+var level_scenarios: Array = []
+var current_scenario_index: int = 0
 
-# Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	# Update UI with starting values on load
+	GlobalData.barya_changed.connect(_on_barya_changed)
+	GlobalData.time_changed.connect(_on_time_changed)
 	update_ui()
+
+	gacha_screen.visible = false
+	level_scenarios = JsonLoader.get_level_scenarios(GlobalData.current_level_id)
+	desktop.scenario_completed.connect(_on_scenario_completed)
+	kuya_overlay.continue_pressed.connect(_on_kuya_continue)
+
+	if buy_cards_button:
+		buy_cards_button.visible = false
+		buy_cards_button.pressed.connect(_on_buy_cards_pressed)
+	if store_coins_button:
+		store_coins_button.visible = false
+		store_coins_button.pressed.connect(_on_store_coins_pressed)
+
+	_spawn_next_scenario()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	if not is_game_active:
 		return
-		
-	# Decrement Piso Timer every frame
+
 	if GlobalData.piso_timer > 0:
-		GlobalData.piso_timer -= delta
-		update_timer_display()
+		GlobalData.update_time(-delta)
 	else:
-		GlobalData.piso_timer = 0
 		trigger_game_over()
+
+func _on_barya_changed(new_amount: int) -> void:
+	barya_label.text = str(new_amount)
+	# keep the dimmed state live in case balance changes while the choice is up
+	if buy_cards_button and buy_cards_button.visible:
+		buy_cards_button.disabled = new_amount < 20
+
+func _on_time_changed(_new_time: float) -> void:
+	update_timer_display()
 
 func update_timer_display() -> void:
 	# Convert seconds into MM:SS format
@@ -39,16 +69,42 @@ func update_ui() -> void:
 func trigger_game_over() -> void:
 	is_game_active = false
 	print("GAME OVER: Piso Time expired!")
-	
-func on_scenario_resolved(is_correct: bool, _tip_text: String) -> void:
-	if is_correct:
-		# Award Barya and bonus time
-		GlobalData.barya_coins += 10
-		GlobalData.piso_timer += 15.0
-		print("Correct choice! +10 Barya, +15s Time")
-	else:
-		# Apply time penalty
-		GlobalData.piso_timer -= 30.0
-		print("Incorrect choice! -30s Time")
-		
-	update_ui()
+
+func _spawn_next_scenario() -> void:
+	if current_scenario_index >= level_scenarios.size():
+		trigger_level_complete()
+		return
+	desktop.spawn_scenario(level_scenarios[current_scenario_index])
+
+# desktop_manager calls this once a popup's choice is resolved
+func _on_scenario_completed(outcome_data: Dictionary) -> void:
+	current_scenario_index += 1
+	kuya_overlay.show_feedback(outcome_data)
+
+# kuya_overlay_controller calls this once the player taps Continue
+func _on_kuya_continue() -> void:
+	_spawn_next_scenario()
+
+func trigger_level_complete() -> void:
+	is_game_active = false
+	GlobalData.unlock_level(GlobalData.current_level_id + 1)
+
+	if buy_cards_button:
+		buy_cards_button.visible = true
+		buy_cards_button.disabled = GlobalData.barya_coins < 20
+	if store_coins_button:
+		store_coins_button.visible = true
+
+	print("Level complete!")
+
+# player chose to spend their Barya on a blind pack
+func _on_buy_cards_pressed() -> void:
+	buy_cards_button.visible = false
+	store_coins_button.visible = false
+	gacha_screen.visible = true
+
+# player chose to keep their Barya and skip the store
+func _on_store_coins_pressed() -> void:
+	buy_cards_button.visible = false
+	store_coins_button.visible = false
+	get_tree().change_scene_to_file("res://scenes/core/level_select.tscn")

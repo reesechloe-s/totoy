@@ -39,7 +39,7 @@ func update_time(amount: float) -> void:
 # level progression
 ## to be called in level selection menu
 func is_level_unlocked(level_id: int) -> bool:
-	return unlocked_levels[level_id]
+	return unlocked_levels.get(level_id, false)
 
 ## when totoy beats a level, the next level shall be unlocked
 func unlock_level(level_id: int) -> void:
@@ -47,8 +47,8 @@ func unlock_level(level_id: int) -> void:
 
 # gacha_cards inventory for album.tscn
 func has_card(card_id: String) -> bool:
-    return unlocked_cards.has(card_id)
+	return unlocked_cards.has(card_id)
 
 func unlock_card(card_id: String) -> void:
-    if not unlocked_cards.has(card_id):
-        unlocked_cards.append(card_id)
+	if not unlocked_cards.has(card_id):
+		unlocked_cards.append(card_id)

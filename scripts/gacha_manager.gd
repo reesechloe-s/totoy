@@ -1,4 +1,5 @@
 # res://scripts/gacha_manager.gd
+class_name GachaManager
 extends Control
 
 # Signal emitted to notify UI to show the reveal animation
@@ -11,9 +12,6 @@ const PACK_COST: int = 20
 @onready var blind_pack_button: TextureButton = $BlindPackButton
 @onready var card_display_panel: Panel = $CardDisplayPanel
 @onready var card_image: TextureRect = $CardDisplayPanel/CardImage
-@onready var card_title: Label = $CardDisplayPanel/CardTitle
-@onready var rarity_label: Label = $CardDisplayPanel/RarityLabel
-@onready var lore_text: RichTextLabel = $CardDisplayPanel/LoreText
 @onready var close_button: Button = $CloseButton
 @onready var done_button: Button = get_node_or_null("DoneButton")
 
@@ -25,11 +23,6 @@ func _ready() -> void:
 	blind_pack_button.pressed.connect(_on_blind_pack_pressed)
 	close_button.pressed.connect(_on_close_pressed)
 	card_display_panel.visible = false
-	# Card art is fully baked (name/rarity/flavor text drawn in by the artist),
-	# so these overlay nodes stay hidden to avoid double-rendering text on the image.
-	card_title.visible = false
-	rarity_label.visible = false
-	lore_text.visible = false
 	if done_button:
 		done_button.pressed.connect(_on_done_pressed)
 
@@ -44,7 +37,7 @@ func buy_pack() -> bool:
 	var pulled_card: Dictionary = _roll_random_card()
 	GlobalData.unlock_card(pulled_card["id"])
 
-	# name/rarity/flavor_text are baked into the card art itself; only the image is rendered here.
+	# name/rarity/flavor_text are baked into the card art itself; only the image is swapped here
 	if pulled_card.has("image_path"):
 		card_image.texture = load(pulled_card["image_path"])
 	card_display_panel.visible = true

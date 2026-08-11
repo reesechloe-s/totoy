@@ -4,20 +4,26 @@ signal barya_changed(new_amount)
 signal time_changed(new_time)
 
 var unlocked_levels: Dictionary = {}
-# connector for level_select and main_game
-var current_level_id: int = 1
 var barya_coins: int = 0
-var piso_timer: float = 300.0 # 5 minutes (in seconds)[cite: 1]
+var piso_timer: float = 300.0 # 5 minutes (in seconds)
 var unlocked_cards: Array = []
 
 # Called when the node enters the scene tree for the first time.
 # check id and unlocked status
 func _ready() -> void:
+	call_deferred("_initialize_levels")
+
+func _initialize_levels() -> void:
 	var all_data = JsonLoader.get_all_scenarios()
-	for level_data in all_data["levels"]:
-		var level_id = level_data["id"]
-		var is_unlocked = level_data["unlocked"]
-		unlocked_levels[level_id] = is_unlocked
+	if all_data and all_data.has("levels"):
+		for level_data in all_data["levels"]:
+			var level_id = level_data["id"]
+			var is_unlocked = level_data["unlocked"]
+			unlocked_levels[level_id] = is_unlocked
+		return
+
+	# Fallback safety default if JsonLoader isn't ready immediately
+	unlocked_levels = {1: true, 2: false, 3: false, 4: false}
 
 # we will only add barya, not subtract it. subtracting is only applicable to time
 func add_barya(amount: int) -> void:
@@ -36,6 +42,10 @@ func update_time(amount: float) -> void:
 	piso_timer += amount
 	if piso_timer < 0.0:
 		piso_timer = 0.0
+	time_changed.emit(piso_timer)
+
+func reset_timer(seconds: float = 300.0) -> void:
+	piso_timer = seconds
 	time_changed.emit(piso_timer)
 
 # level progression

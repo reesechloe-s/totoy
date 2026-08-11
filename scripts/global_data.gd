@@ -4,6 +4,7 @@ signal barya_changed(new_amount)
 signal time_changed(new_time)
 
 var unlocked_levels: Dictionary = {}
+var current_level_id: int = 1
 var barya_coins: int = 0
 var piso_timer: float = 300.0 # 5 minutes (in seconds)[cite: 1]
 var unlocked_cards: Array = []

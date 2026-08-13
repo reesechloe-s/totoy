@@ -6,27 +6,42 @@ var _gacha_cache: Dictionary = {}
 
 
 # file opening logic
-func _load_json_file(file_path: String) -> Variant:
+## Safely loads and parses a JSON file, guaranteeing a Dictionary return.
+func _load_json_file(file_path: String) -> Dictionary:
+	# 1. Verify file existence
 	if not FileAccess.file_exists(file_path):
 		push_error("JsonLoader: File does not exist at path: " + file_path)
 		return {}
 
-	var file = FileAccess.open(file_path, FileAccess.READ)
+	# 2. Open file safely
+	var file := FileAccess.open(file_path, FileAccess.READ)
 	if file == null:
-		push_error("JsonLoader: Failed to open file at path: " + file_path)
+		var err := FileAccess.get_open_error()
+		push_error("JsonLoader: Could not open '%s' (Error Code: %d)" % [file_path, err])
 		return {}
 
-	var content = file.get_as_text()
+	# 3. Read content into memory and release file resource immediately
+	var content := file.get_as_text()
+	file.close()
+
+	# 4. Check for blank or whitespace-only content
 	if content.strip_edges().is_empty():
 		push_warning("JsonLoader: File is empty at path: " + file_path)
 		return {}
 
+	# 5. Parse JSON string
 	var parsed = JSON.parse_string(content)
 	if parsed == null:
-		push_error("JsonLoader: Failed to parse valid JSON from path: " + file_path)
+		push_error("JsonLoader: Failed to parse valid JSON (syntax error) at path: " + file_path)
+		return {}
+
+	# 6. Enforce strict return type safety
+	if typeof(parsed) != TYPE_DICTIONARY:
+		push_error("JsonLoader: Expected a Dictionary object in '%s', but got %s." % [file_path, type_string(typeof(parsed))])
 		return {}
 
 	return parsed
+	
 # LEARNING NOTES: JSON PARSE HERE READS NUMERIC VALUES, OFTEN IMPORTS THEM AS FLOAT JUST TO BE SAFE
 
 

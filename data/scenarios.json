@@ -63,7 +63,7 @@
 	  "level": 1,
 	  "order": 1,
 	  "window_type": "static_image",
-	  "image_path": "res://assets/art/ui/image_6f3d18.png",
+	  "image_path": "res://assets/art/ui/nokia_scam.png",
 	  "ambient": {
 		"speaker": "Kid at Unit 4",
 		"speech_bubble": "Uy Totoy! Panalo ka daw! 1 millionth visitor ka oh!",
@@ -120,7 +120,7 @@
 	  "level": 1,
 	  "order": 2,
 	  "window_type": "static_image",
-	  "image_path": "res://assets/art/ui/image_6f3d1a.png",
+	  "image_path": "res://assets/art/ui/virus_warning_detected.png",
 	  "ambient": {
 		"speaker": "Kid at next PC",
 		"speech_bubble": "Totoy, i-download mo na 'yan! Baka masira 'yang PC, singilin ka pa ni Kuya!",

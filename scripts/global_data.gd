@@ -9,12 +9,16 @@ var unlocked_levels: Dictionary = {}
 var current_level_id: int = 1
 var barya_coins: int = 0
 var piso_timer: float = 300.0 # 5 minutes (in seconds)[cite: 1]
-var unlocked_cards: Array = []
+var unlocked_cards: Array[String] = []
 
 # Called when the node enters the scene tree for the first time.
 # check id and unlocked status
 func _ready() -> void:
+	# Ensure that the JsonLoader (an autoload) is placed above global data since it first needs to boot up before calling
 	var all_data = JsonLoader.get_all_scenarios()
+	if all_data.is_empty() or not all_data.has("levels"):
+		push_error("GlobalData: failed to load scenario data; level unlock state will be empty.")
+		return
 	for level_data in all_data["levels"]:
 		var level_id = level_data["id"]
 		var is_unlocked = level_data["unlocked"]
@@ -22,11 +26,17 @@ func _ready() -> void:
 
 # we will only add barya, not subtract it. subtracting is only applicable to time
 func add_barya(amount: int) -> void:
+	if amount < 0:
+		push_warning("GlobalData: add barya called with negative amount)
+		return
 	barya_coins += amount
 	barya_changed.emit(barya_coins)
 
 # spending at gacha
 func spend_barya(amount: int) -> bool:
+	if amount < 0:
+		push_warning("GlobalData: spend_barya called with negative amount)
+		return false
 	if barya_coins >= amount:
 		barya_coins -= amount
 		barya_changed.emit(barya_coins)

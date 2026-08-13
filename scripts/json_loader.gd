@@ -63,3 +63,9 @@ func get_all_gacha_cards() -> Dictionary:
 		if data is Dictionary:
 			_gacha_cache = data
 	return _gacha_cache
+
+# LEARNING NOTES
+## WHY WE DON'T NEED TO HAVE func_get_choices?
+## When JsonLoader grabs a scenario like "l1_nokia_scam", it grabs the entire dictionary block for that scenario. Because the "choices" array is nested securely inside that specific scenario block, it gets pulled in automatically.
+## syntax for if int(level_data.get("id", -1)) == level_id:
+## "Extract the ID from this block of data. Make absolutely sure it is an integer. If the ID is missing, pretend it is -1. Now, does that ID equal 1? If yes, this is the level we are looking for!"

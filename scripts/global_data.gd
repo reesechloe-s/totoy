@@ -27,7 +27,7 @@ func _ready() -> void:
 # we will only add barya, not subtract it. subtracting is only applicable to time
 func add_barya(amount: int) -> void:
 	if amount < 0:
-		push_warning("GlobalData: add barya called with negative amount)
+		push_warning("GlobalData: add barya called with negative amount")
 		return
 	barya_coins += amount
 	barya_changed.emit(barya_coins)
@@ -35,7 +35,7 @@ func add_barya(amount: int) -> void:
 # spending at gacha
 func spend_barya(amount: int) -> bool:
 	if amount < 0:
-		push_warning("GlobalData: spend_barya called with negative amount)
+		push_warning("GlobalData: spend_barya called with negative amount")
 		return false
 	if barya_coins >= amount:
 		barya_coins -= amount

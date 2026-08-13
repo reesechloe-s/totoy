@@ -6,7 +6,7 @@ extends Control
 
 # Adjust node paths based on main_menu.tscn greybox layout
 # onready instead of export.
-@onready var start_button: Button = $StartButton
+@onready var start_button: TextureButton = $StartButton
 
 func _ready() -> void:
 	# Connect button press signal

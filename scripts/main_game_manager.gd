@@ -107,7 +107,7 @@ func _on_barya_changed(new_amount: int) -> void:
 	if barya_label:
 		barya_label.text = str(new_amount)
 	# Keep the dimmed/disabled state live for the TextureButton
-	if buy_cards_button and level_end_screen.visible:
+	if buy_cards_button and level_end_screen and level_end_screen.visible:
 		buy_cards_button.disabled = new_amount < 20
 
 func _on_time_changed(_new_time: float) -> void:

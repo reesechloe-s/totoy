@@ -4,14 +4,18 @@ extends Node2D
 # NODE REFERENCES
 # -------------------------------------------------------------------------
 # Core UI
-@onready var timer_label: Label = $UILayer/MonitorBezel/PisoTimerLabel
-@onready var barya_label: Label = $UILayer/MonitorBezel/BaryaCountLabel
+@onready var ui_layer: CanvasLayer = $UILayer
+@onready var timer_label: Label = $UILayer/PisoTimerLabel
+@onready var barya_label: Label = $UILayer/BaryaCountLabel
 @onready var desktop: Control = $UILayer/DesktopInstance
+
+# Intro Transition
+@onready var transition_player: AnimationPlayer = $TransitionLayer/AnimationPlayer
 
 # Overlays & Menus
 @onready var kuya_overlay: Control = $OverlayLayer/KuyaOverlayInstance
 @onready var gacha_screen: Control = $OverlayLayer/GachaScreenInstance
-@onready var level_end_screen: Control = $OverlayLayer/LevelEndScreen
+@onready var level_end_screen: TextureRect = $OverlayLayer/LevelEndScreen
 
 # Artist-Designed Texture Buttons
 @onready var buy_cards_button: TextureButton = $OverlayLayer/LevelEndScreen/BuyCardsButton
@@ -44,7 +48,8 @@ func _ready() -> void:
 	GlobalData.time_changed.connect(_on_time_changed)
 	update_ui()
 
-	# Hide menus by default
+	# The comshop background is visible immediately; the monitor UI reveals after the fade-in
+	if ui_layer: ui_layer.visible = false
 	if gacha_screen: gacha_screen.visible = false
 	if level_end_screen: level_end_screen.visible = false
 	if left_speech: left_speech.visible = false
@@ -59,17 +64,30 @@ func _ready() -> void:
 
 	if desktop and desktop.has_signal("scenario_completed"):
 		desktop.scenario_completed.connect(_on_scenario_completed)
-	
+
 	# Connect artist-designed buttons
 	if buy_cards_button:
 		buy_cards_button.pressed.connect(_on_buy_cards_pressed)
 	if store_coins_button:
 		store_coins_button.pressed.connect(_on_store_coins_pressed)
-	
+
 	# Fetch scenarios for the current level (defaulting to level 1 if not set, cleaned up GDScript 4 syntax)
 	var active_level: int = GlobalData.current_level_id
 	level_scenarios = JsonLoader.get_level_scenarios(active_level)
-	
+
+	_play_intro_transition()
+
+func _play_intro_transition() -> void:
+	# Freeze Piso Time while the cinematic fade plays, same flag used to pause during Kuya feedback
+	is_timer_paused = true
+
+	if transition_player and transition_player.has_animation("fade_to_monitor"):
+		transition_player.play("fade_to_monitor")
+		await transition_player.animation_finished
+
+	if ui_layer: ui_layer.visible = true
+	is_timer_paused = false
+
 	_spawn_next_scenario()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

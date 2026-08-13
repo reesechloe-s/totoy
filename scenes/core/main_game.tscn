@@ -1,6 +1,12 @@
 [gd_scene format=3 uid="uid://ckmdfuy8ff3dx"]
 
 [ext_resource type="Texture2D" uid="uid://dk15ice8c2oac" path="res://assets/art/bg/pisonet_shop_bg.png" id="1_1u5st"]
+[ext_resource type="Texture2D" uid="uid://chydk246ubdnu" path="res://assets/art/characters/npc_kid_left.png" id="2_sdxsi"]
+[ext_resource type="Texture2D" uid="uid://cexqu1urnb2de" path="res://assets/art/dialogue_panel_1.png" id="3_3bwdu"]
+[ext_resource type="Texture2D" uid="uid://do2mcqfws5u7s" path="res://assets/art/characters/npc_kid_right.png" id="4_lek67"]
+[ext_resource type="Texture2D" uid="uid://7uvgmtvxt31o" path="res://assets/art/dialogue_panel_2.png" id="5_ihhme"]
+[ext_resource type="Texture2D" uid="uid://cq82n0x257f4o" path="res://assets/art/characters/totoy_thinking.png" id="6_t7v8b"]
+[ext_resource type="Texture2D" uid="uid://cmky8g8t86i5x" path="res://assets/art/characters/kuya_bantay.png" id="7_pymhd"]
 
 [node name="MainGame" type="Node2D" unique_id=239025680]
 
@@ -10,26 +16,91 @@ texture = ExtResource("1_1u5st")
 [node name="PeerKidsLayer" type="Node2D" parent="." unique_id=2029742438]
 
 [node name="KidLeft" type="Sprite2D" parent="PeerKidsLayer" unique_id=1748827414]
+position = Vector2(-443, 30)
+scale = Vector2(0.45, 0.45)
+texture = ExtResource("2_sdxsi")
 
-[node name="KidRight" type="Sprite2D" parent="PeerKidsLayer" unique_id=908922407]
+[node name="SpeechBubble" type="NinePatchRect" parent="PeerKidsLayer/KidLeft" unique_id=998577019]
+custom_minimum_size = Vector2(180, 60)
+offset_left = 406.66666
+offset_top = -586.6667
+offset_right = 1857.7777
+offset_bottom = -66.66669
+texture = ExtResource("3_3bwdu")
 
-[node name="TotoySprite" type="Sprite2D" parent="." unique_id=1379429332]
-
-[node name="ShopAudioPlayer" type="AudioStreamPlayer" parent="." unique_id=1325361819]
-
-[node name="UILayer" type="CanvasLayer" parent="." unique_id=2137738966]
-
-[node name="MonitorBezel" type="TextureRect" parent="UILayer" unique_id=463699640]
-offset_right = 40.0
-offset_bottom = 40.0
-
-[node name="PisoTimerLabel" type="Label" parent="UILayer/MonitorBezel" unique_id=291493921]
+[node name="Dialogue" type="Label" parent="PeerKidsLayer/KidLeft/SpeechBubble" unique_id=1775172666]
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 23.0
 
-[node name="BaryaCountLabel" type="Label" parent="UILayer/MonitorBezel" unique_id=1839350404]
+[node name="KidRight" type="Sprite2D" parent="PeerKidsLayer" unique_id=908922407]
+position = Vector2(-756, 49)
+scale = Vector2(0.43, 0.43)
+texture = ExtResource("4_lek67")
+
+[node name="SpeechBubble" type="NinePatchRect" parent="PeerKidsLayer/KidRight" unique_id=677619145]
+custom_minimum_size = Vector2(180, 60)
+offset_left = 1641.8605
+offset_top = -1209.3022
+offset_right = 3030.9045
+offset_bottom = -686.6149
+texture = ExtResource("5_ihhme")
+
+[node name="Dialogue" type="Label" parent="PeerKidsLayer/KidRight/SpeechBubble" unique_id=948521220]
 layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+
+[node name="TotoySprite" type="Sprite2D" parent="." unique_id=1379429332]
+position = Vector2(-571, 52)
+scale = Vector2(0.45, 0.45)
+texture = ExtResource("6_t7v8b")
+
+[node name="ShopAudioPlayer" type="AudioStreamPlayer" parent="." unique_id=1325361819]
+
+[node name="OverlayLayer" type="CanvasLayer" parent="." unique_id=210081648]
+
+[node name="KuyaOverlayInstance" type="Control" parent="OverlayLayer" unique_id=675929926]
+custom_minimum_size = Vector2(0.5, 0.5)
+layout_mode = 3
+anchors_preset = 0
+offset_left = 152.0
+offset_top = -400.0
+offset_right = 674.0
+offset_bottom = 475.0
+
+[node name="Kuya" type="Sprite2D" parent="OverlayLayer/KuyaOverlayInstance" unique_id=112720828]
+position = Vector2(549, 412)
+scale = Vector2(0.55, 0.55)
+texture = ExtResource("7_pymhd")
+
+[node name="GachaScreenInstance" type="Control" parent="OverlayLayer" unique_id=1265940754]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="LevelEndScreen" type="TextureRect" parent="OverlayLayer" unique_id=372089221]
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="BuyCardsButton" type="TextureButton" parent="OverlayLayer/LevelEndScreen" unique_id=1449954463]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="StoreCoinsButton" type="TextureButton" parent="OverlayLayer/LevelEndScreen" unique_id=1309384161]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="UILayer" type="CanvasLayer" parent="." unique_id=2137738966]
+
+[node name="BaryaCountLabel" type="Label" parent="UILayer" unique_id=1839350404]
+offset_right = 40.0
+offset_bottom = 23.0
+
+[node name="PisoTimerLabel" type="Label" parent="UILayer" unique_id=291493921]
 offset_right = 40.0
 offset_bottom = 23.0
 
@@ -39,16 +110,10 @@ anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
-[node name="OverlayLayer" type="CanvasLayer" parent="." unique_id=210081648]
+[node name="TransitionLayer" type="CanvasLayer" parent="." unique_id=1155253321]
 
-[node name="KuyaOverlayInstance" type="Control" parent="OverlayLayer" unique_id=675929926]
-layout_mode = 3
-anchors_preset = 0
+[node name="FadeRect" type="ColorRect" parent="TransitionLayer" unique_id=1050903209]
 offset_right = 40.0
 offset_bottom = 40.0
 
-[node name="GachaScreenInstance" type="Control" parent="OverlayLayer" unique_id=1265940754]
-layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
+[node name="AnimationPlayer" type="AnimationPlayer" parent="TransitionLayer" unique_id=1497280843]

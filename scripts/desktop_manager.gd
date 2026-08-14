@@ -13,6 +13,10 @@ signal scenario_completed(outcome_data: Dictionary)
 var active_popup: PanelContainer = null
 
 func spawn_scenario(scenario_data: Dictionary) -> void:
+	if active_popup != null:
+		push_warning("DesktopManager: spawn_scenario called while a popup is still active; ignoring.")
+		return
+
 	var new_popup = popup_scene.instantiate()
 	window_container.add_child(new_popup)
 	new_popup.setup_popup(scenario_data)

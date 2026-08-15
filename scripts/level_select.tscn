@@ -1,4 +1,4 @@
-[gd_scene format=3 uid="uid://cs3qpj4goxnhs"]
+[gd_scene format=3 uid="uid://cxvqhnyvbda3g"]
 
 [ext_resource type="Texture2D" uid="uid://ba0b0i6tdrb14" path="res://assets/art/workspace-desktop.png" id="1_e01cn"]
 [ext_resource type="Script" uid="uid://odcc51vei727" path="res://scripts/level_select.gd" id="1_nf8bc"]

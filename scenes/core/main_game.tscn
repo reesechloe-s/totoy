@@ -7,8 +7,9 @@
 [ext_resource type="Texture2D" uid="uid://7uvgmtvxt31o" path="res://assets/art/dialogue_panel_2.png" id="5_ihhme"]
 [ext_resource type="Texture2D" uid="uid://cq82n0x257f4o" path="res://assets/art/characters/totoy_thinking.png" id="6_t7v8b"]
 [ext_resource type="PackedScene" uid="uid://b8o0pj463aldv" path="res://scenes/ui/kuya_overlay.tscn" id="7_lek67"]
+[ext_resource type="AudioStream" uid="uid://cojg0q7jgm0ym" path="res://audios/bgm_main.ogg" id="7_t7v8b"]
 [ext_resource type="PackedScene" uid="uid://dfdmuk3x1nm4a" path="res://scenes/ui/gacha_screen.tscn" id="8_ihhme"]
-[ext_resource type="Texture2D" uid="uid://cmn3e8u0hjpx5" path="res://assets/art/ui/monitor_bezel.png" id="8_t7v8b"]
+[ext_resource type="Texture2D" uid="uid://ba0b0i6tdrb14" path="res://assets/art/workspace-desktop.png" id="9_pymhd"]
 [ext_resource type="PackedScene" uid="uid://n1fvnav20d7w" path="res://scenes/ui/desktop.tscn" id="9_t7v8b"]
 
 [node name="MainGame" type="Node2D" unique_id=239025680]
@@ -60,6 +61,7 @@ scale = Vector2(0.45, 0.45)
 texture = ExtResource("6_t7v8b")
 
 [node name="ShopAudioPlayer" type="AudioStreamPlayer" parent="." unique_id=1325361819]
+stream = ExtResource("7_t7v8b")
 
 [node name="OverlayLayer" type="CanvasLayer" parent="." unique_id=210081648]
 
@@ -75,7 +77,7 @@ offset_left = -953.0
 offset_top = -563.0
 offset_right = 967.0
 offset_bottom = 517.0
-texture = ExtResource("8_t7v8b")
+texture = ExtResource("9_pymhd")
 
 [node name="BuyCardsButton" type="TextureButton" parent="OverlayLayer/LevelEndScreen" unique_id=1449954463]
 layout_mode = 0
@@ -88,10 +90,11 @@ offset_right = 40.0
 offset_bottom = 40.0
 
 [node name="GachacScreenInstance" parent="OverlayLayer" unique_id=2001560086 instance=ExtResource("8_ihhme")]
-offset_left = -142.0
-offset_top = -217.0
-offset_right = -142.0
-offset_bottom = -217.0
+offset_left = -222.00003
+offset_top = -369.0
+offset_right = 123.0
+offset_bottom = -341.0
+scale = Vector2(1.5, 1.5)
 
 [node name="UILayer" type="CanvasLayer" parent="." unique_id=2137738966]
 

@@ -4,32 +4,72 @@
 [ext_resource type="Texture2D" uid="uid://chydk246ubdnu" path="res://assets/art/characters/npc_kid_left.png" id="2_sdxsi"]
 [ext_resource type="Texture2D" uid="uid://cexqu1urnb2de" path="res://assets/art/dialogue_panel_1.png" id="3_3bwdu"]
 [ext_resource type="Texture2D" uid="uid://do2mcqfws5u7s" path="res://assets/art/characters/npc_kid_right.png" id="4_lek67"]
-[ext_resource type="Texture2D" uid="uid://7uvgmtvxt31o" path="res://assets/art/dialogue_panel_2.png" id="5_ihhme"]
 [ext_resource type="Texture2D" uid="uid://cq82n0x257f4o" path="res://assets/art/characters/totoy_thinking.png" id="6_t7v8b"]
 [ext_resource type="PackedScene" uid="uid://b8o0pj463aldv" path="res://scenes/ui/kuya_overlay.tscn" id="7_lek67"]
 [ext_resource type="AudioStream" uid="uid://cojg0q7jgm0ym" path="res://audios/bgm_main.ogg" id="7_t7v8b"]
 [ext_resource type="PackedScene" uid="uid://dfdmuk3x1nm4a" path="res://scenes/ui/gacha_screen.tscn" id="8_ihhme"]
+[ext_resource type="Texture2D" uid="uid://cbqxixi2sbg4k" path="res://assets/art/buy_cards_button.png" id="9_ihfcm"]
 [ext_resource type="Texture2D" uid="uid://ba0b0i6tdrb14" path="res://assets/art/workspace-desktop.png" id="9_pymhd"]
 [ext_resource type="PackedScene" uid="uid://n1fvnav20d7w" path="res://scenes/ui/desktop.tscn" id="9_t7v8b"]
+[ext_resource type="Texture2D" uid="uid://cnl5gaftehlyq" path="res://assets/art/store_cards_button.png" id="10_fq26o"]
+[ext_resource type="FontFile" uid="uid://b75kvf23rkei2" path="res://assets/font/Matemasie-Regular.ttf" id="12_t1ix5"]
+
+[sub_resource type="Animation" id="Animation_dhndb"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("FadeRect:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0.011764706, 0.011764706, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_2t3dg"]
+resource_name = "fade_to_black"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("FadeRect:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.47),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0.011764706, 0.011764706, 0, 0), Color(0.011764706, 0.011764706, 0, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_v3wg5"]
+_data = {
+&"RESET": SubResource("Animation_dhndb"),
+&"fade_to_black": SubResource("Animation_2t3dg")
+}
 
 [node name="MainGame" type="Node2D" unique_id=239025680]
 
 [node name="ShopBackground" type="Sprite2D" parent="." unique_id=1850050833]
+position = Vector2(971, 533)
 texture = ExtResource("1_1u5st")
 
 [node name="PeerKidsLayer" type="Node2D" parent="." unique_id=2029742438]
 
 [node name="KidLeft" type="Sprite2D" parent="PeerKidsLayer" unique_id=1748827414]
-position = Vector2(-443, 30)
+position = Vector2(528, 591)
 scale = Vector2(0.45, 0.45)
 texture = ExtResource("2_sdxsi")
 
 [node name="SpeechBubble" type="NinePatchRect" parent="PeerKidsLayer/KidLeft" unique_id=998577019]
 custom_minimum_size = Vector2(180, 60)
-offset_left = 406.66666
-offset_top = -586.6667
-offset_right = 1857.7777
-offset_bottom = -66.66669
+offset_left = 335.55554
+offset_top = -568.8889
+offset_right = 1786.6666
+offset_bottom = -48.888916
 texture = ExtResource("3_3bwdu")
 
 [node name="Dialogue" type="Label" parent="PeerKidsLayer/KidLeft/SpeechBubble" unique_id=1775172666]
@@ -38,25 +78,12 @@ offset_right = 40.0
 offset_bottom = 23.0
 
 [node name="KidRight" type="Sprite2D" parent="PeerKidsLayer" unique_id=908922407]
-position = Vector2(-756, 49)
+position = Vector2(169.00012, 601.00006)
 scale = Vector2(0.43, 0.43)
 texture = ExtResource("4_lek67")
 
-[node name="SpeechBubble" type="NinePatchRect" parent="PeerKidsLayer/KidRight" unique_id=677619145]
-custom_minimum_size = Vector2(180, 60)
-offset_left = 1641.8605
-offset_top = -1209.3022
-offset_right = 3030.9045
-offset_bottom = -686.6149
-texture = ExtResource("5_ihhme")
-
-[node name="Dialogue" type="Label" parent="PeerKidsLayer/KidRight/SpeechBubble" unique_id=948521220]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 23.0
-
 [node name="TotoySprite" type="Sprite2D" parent="." unique_id=1379429332]
-position = Vector2(-571, 52)
+position = Vector2(351, 599)
 scale = Vector2(0.45, 0.45)
 texture = ExtResource("6_t7v8b")
 
@@ -66,13 +93,12 @@ stream = ExtResource("7_t7v8b")
 [node name="OverlayLayer" type="CanvasLayer" parent="." unique_id=210081648]
 
 [node name="KuyaOverlayInstance" parent="OverlayLayer" unique_id=288496870 instance=ExtResource("7_lek67")]
-offset_left = 456.0
-offset_top = -476.0
-offset_right = 456.0
-offset_bottom = -476.0
+offset_left = 929.0
+offset_right = 929.0
 scale = Vector2(0.5, 0.5)
 
 [node name="LevelEndScreen" type="TextureRect" parent="OverlayLayer" unique_id=372089221]
+visible = false
 offset_left = -953.0
 offset_top = -563.0
 offset_right = 967.0
@@ -81,42 +107,77 @@ texture = ExtResource("9_pymhd")
 
 [node name="BuyCardsButton" type="TextureButton" parent="OverlayLayer/LevelEndScreen" unique_id=1449954463]
 layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
+offset_left = 991.0
+offset_top = 185.0
+offset_right = 1342.0
+offset_bottom = 274.0
+texture_normal = ExtResource("9_ihfcm")
 
 [node name="StoreCoinsButton" type="TextureButton" parent="OverlayLayer/LevelEndScreen" unique_id=1309384161]
 layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
+offset_left = 992.0
+offset_top = 306.0
+offset_right = 1343.0
+offset_bottom = 395.0
+texture_normal = ExtResource("10_fq26o")
 
 [node name="GachacScreenInstance" parent="OverlayLayer" unique_id=2001560086 instance=ExtResource("8_ihhme")]
-offset_left = -222.00003
-offset_top = -369.0
-offset_right = 123.0
-offset_bottom = -341.0
+visible = false
+offset_left = -502.00003
+offset_top = -397.0
+offset_right = -157.0
+offset_bottom = -369.0
 scale = Vector2(1.5, 1.5)
+mouse_filter = 2
 
 [node name="UILayer" type="CanvasLayer" parent="." unique_id=2137738966]
 
 [node name="BaryaCountLabel" type="Label" parent="UILayer" unique_id=1839350404]
-offset_right = 40.0
-offset_bottom = 23.0
+offset_left = 1749.0
+offset_top = 44.0
+offset_right = 2091.0
+offset_bottom = 165.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.4392157)
+theme_override_constants/shadow_offset_x = 3
+theme_override_constants/shadow_offset_y = 3
+theme_override_constants/shadow_outline_size = 1
+theme_override_fonts/font = ExtResource("12_t1ix5")
+theme_override_font_sizes/font_size = 33
+text = "🪙 10"
 
 [node name="PisoTimerLabel" type="Label" parent="UILayer" unique_id=291493921]
-offset_right = 40.0
-offset_bottom = 23.0
+offset_left = 1749.0
+offset_right = 1894.0
+offset_bottom = 50.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.3647059)
+theme_override_constants/shadow_offset_x = 3
+theme_override_constants/shadow_offset_y = 3
+theme_override_constants/shadow_outline_size = 1
+theme_override_fonts/font = ExtResource("12_t1ix5")
+theme_override_font_sizes/font_size = 33
+text = "⏳ 05:00"
 
-[node name="DesktopInstance" parent="UILayer" unique_id=241140268 instance=ExtResource("9_t7v8b")]
+[node name="DesktopInstance" parent="UILayer" unique_id=241140268 node_paths=PackedStringArray("window_container") instance=ExtResource("9_t7v8b")]
 visible = false
-offset_left = -943.0
-offset_top = -557.0
-offset_right = -943.0
-offset_bottom = -557.0
+offset_left = -960.0
+offset_top = -564.0
+offset_right = -949.0
+offset_bottom = -547.0
+window_container = NodePath("PopupSpawnArea")
 
 [node name="TransitionLayer" type="CanvasLayer" parent="." unique_id=1155253321]
 
 [node name="FadeRect" type="ColorRect" parent="TransitionLayer" unique_id=1050903209]
-offset_right = 40.0
-offset_bottom = 40.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 11.0
+offset_right = 11.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+color = Color(0.011764706, 0.011764706, 0, 0)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="TransitionLayer" unique_id=1497280843]
+libraries/ = SubResource("AnimationLibrary_v3wg5")

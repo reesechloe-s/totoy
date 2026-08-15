@@ -54,7 +54,8 @@ _data = {
 [node name="MainGame" type="Node2D" unique_id=239025680]
 
 [node name="ShopBackground" type="Sprite2D" parent="." unique_id=1850050833]
-position = Vector2(971, 533)
+position = Vector2(965.5, 533)
+scale = Vector2(1.0057292, 1)
 texture = ExtResource("1_1u5st")
 
 [node name="PeerKidsLayer" type="Node2D" parent="." unique_id=2029742438]
@@ -171,8 +172,9 @@ window_container = NodePath("PopupSpawnArea")
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 11.0
+offset_top = -7.0
 offset_right = 11.0
+offset_bottom = -7.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3

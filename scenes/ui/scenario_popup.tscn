@@ -1,28 +1,63 @@
 [gd_scene format=3 uid="uid://c7pdobwkvoku"]
 
+[ext_resource type="Texture2D" uid="uid://d2ffk64yb1g61" path="res://assets/art/fake_pop-up_window.png" id="1_r3281"]
+[ext_resource type="Texture2D" uid="uid://earrklvyqupy" path="res://assets/art/ui/nokia_scam.png" id="2_8ac0f"]
+[ext_resource type="Texture2D" uid="uid://c20rum7dq5tty" path="res://assets/art/ui/checkmark_correct.png" id="3_eaoye"]
+[ext_resource type="Texture2D" uid="uid://cq3ahly2ttb7a" path="res://assets/art/ui/cross_error.png" id="4_md40y"]
+[ext_resource type="Texture2D" uid="uid://dhkb41ce1ka70" path="res://assets/art/ui/btn_suriin.png" id="5_5nlaj"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_pnn0r"]
+texture = ExtResource("1_r3281")
+
 [node name="PanelContainer" type="PanelContainer" unique_id=1847019588]
 offset_right = 1913.0
 offset_bottom = 1074.0
+theme_override_styles/panel = SubResource("StyleBoxTexture_pnn0r")
 
 [node name="VBox" type="VBoxContainer" parent="." unique_id=1618348348]
 layout_mode = 2
+theme_override_constants/separation = 7
 
 [node name="ScenarioImageView" type="TextureRect" parent="VBox" unique_id=1108169526]
 layout_mode = 2
-
-[node name="SuriinToggleButton" type="TextureButton" parent="VBox" unique_id=2113971779]
-layout_mode = 2
+size_flags_vertical = 3
+texture = ExtResource("2_8ac0f")
+expand_mode = 1
+stretch_mode = 5
 
 [node name="ChoiceHBox" type="HBoxContainer" parent="VBox" unique_id=686912751]
 layout_mode = 2
+size_flags_vertical = 4
+theme_override_constants/separation = 20
+alignment = 1
 
 [node name="Option1Btn" type="Button" parent="VBox/ChoiceHBox" unique_id=1219735123]
+custom_minimum_size = Vector2(120, 120)
 layout_mode = 2
+size_flags_horizontal = 4
+icon = ExtResource("3_eaoye")
+flat = true
+icon_alignment = 1
+expand_icon = true
 
 [node name="Option2Btn" type="Button" parent="VBox/ChoiceHBox" unique_id=1379142887]
+custom_minimum_size = Vector2(120, 120)
 layout_mode = 2
+size_flags_horizontal = 4
+icon = ExtResource("4_md40y")
+flat = true
+icon_alignment = 1
+expand_icon = true
+
+[node name="SuriinToggleButton" type="TextureButton" parent="VBox/ChoiceHBox" unique_id=2113971779]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+size_flags_horizontal = 4
+texture_normal = ExtResource("5_5nlaj")
+ignore_texture_size = true
 
 [node name="SuriinPopupPanel" type="PanelContainer" parent="." unique_id=1988356953]
+visible = false
 layout_mode = 2
 
 [node name="SuriinVBox" type="VBoxContainer" parent="SuriinPopupPanel" unique_id=921643737]

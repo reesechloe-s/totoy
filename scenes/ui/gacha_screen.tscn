@@ -17,6 +17,7 @@ script = ExtResource("1_d8w5k")
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
+color = Color(0.9767516, 0.9695149, 0.78697765, 1)
 
 [node name="BlindPackButton" type="TextureButton" parent="." unique_id=1728256670]
 layout_mode = 0

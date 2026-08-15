@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://b8o0pj463aldv"]
 
 [ext_resource type="Script" uid="uid://di70lpyun5f12" path="res://scripts/kuya_overlay_controller.gd" id="1_gy27m"]
+[ext_resource type="Texture2D" uid="uid://cmky8g8t86i5x" path="res://assets/art/characters/kuya_bantay.png" id="2_ovksw"]
 
 [node name="KuyaOverlay" type="Control" unique_id=288496870]
 layout_mode = 3
@@ -20,6 +21,7 @@ offset_bottom = 40.0
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
+texture = ExtResource("2_ovksw")
 
 [node name="DialogPanel" type="Panel" parent="." unique_id=2027366172]
 layout_mode = 0

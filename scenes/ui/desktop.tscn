@@ -1,10 +1,12 @@
 [gd_scene format=3 uid="uid://n1fvnav20d7w"]
 
 [ext_resource type="Script" uid="uid://ds6rl6j5wl32y" path="res://scripts/desktop_manager.gd" id="1_2nepw"]
-[ext_resource type="Script" uid="uid://clogwkebgpb61" path="res://scripts/suriin_tool.gd" id="2_uyncw"]
+[ext_resource type="PackedScene" uid="uid://c7pdobwkvoku" path="res://scenes/ui/scenario_popup.tscn" id="2_6yas7"]
+[ext_resource type="Script" path="res://scripts/suriin_tool.gd" id="2_uyncw"]
 [ext_resource type="Texture2D" uid="uid://cay2rdklptjt2" path="res://assets/art/bg/desktop_wallpaper.png" id="2_yw0nm"]
+[ext_resource type="Texture2D" uid="uid://dhkb41ce1ka70" path="res://assets/art/ui/btn_suriin.png" id="4_6yas7"]
 
-[node name="DesktopRoot" type="Control" unique_id=241140268]
+[node name="DesktopRoot" type="Control" unique_id=241140268 node_paths=PackedStringArray("window_container")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -12,6 +14,8 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_2nepw")
+popup_scene = ExtResource("2_6yas7")
+window_container = NodePath("PopupSpawnArea")
 
 [node name="Wallpaper" type="TextureRect" parent="." unique_id=2028785025]
 layout_mode = 1
@@ -48,8 +52,11 @@ layout_mode = 2
 
 [node name="SuriinTool" type="TextureButton" parent="." unique_id=1344227744]
 layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
+offset_left = 1746.0
+offset_top = 23.0
+offset_right = 1874.0
+offset_bottom = 151.0
+texture_normal = ExtResource("4_6yas7")
 script = ExtResource("2_uyncw")
 
 [node name="PopupSpawnArea" type="Control" parent="." unique_id=866533914]

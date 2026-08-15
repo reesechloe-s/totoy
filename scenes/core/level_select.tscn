@@ -1,6 +1,7 @@
-[gd_scene format=3 uid="uid://cs3qpj4goxnhs"]
+[gd_scene format=3 uid="uid://cxvqhnyvbda3g"]
 
 [ext_resource type="Texture2D" uid="uid://ba0b0i6tdrb14" path="res://assets/art/workspace-desktop.png" id="1_e01cn"]
+[ext_resource type="Script" uid="uid://odcc51vei727" path="res://scripts/level_select.gd" id="1_nf8bc"]
 [ext_resource type="Texture2D" uid="uid://c5oyqrvs3kmoo" path="res://assets/art/game-ui-select-level.png" id="2_nf8bc"]
 [ext_resource type="Texture2D" uid="uid://e2612eg215fd" path="res://assets/art/characters/totoy_idle.png" id="3_nt1ai"]
 [ext_resource type="Texture2D" uid="uid://d0oecjfjg252a" path="res://assets/art/unlocked_level_select_buttons_1.png" id="4_wnyjp"]
@@ -15,6 +16,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_nf8bc")
 
 [node name="DesktopBG" type="TextureRect" parent="." unique_id=1250274360]
 layout_mode = 1
@@ -45,6 +47,19 @@ grow_vertical = 2
 texture = ExtResource("2_nf8bc")
 expand_mode = 1
 stretch_mode = 5
+
+[node name="CloseButton" type="TextureButton" parent="WindowPanel" unique_id=454289901]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.81100005
+anchor_top = 0.177
+anchor_right = 0.82900006
+anchor_bottom = 0.20400001
+offset_left = -3.2911377
+offset_top = -9.778
+offset_right = 6.4509277
+offset_bottom = 6.543991
+grow_horizontal = 0
 
 [node name="MainHBox" type="HBoxContainer" parent="WindowPanel" unique_id=917533845]
 custom_minimum_size = Vector2(80, 80)

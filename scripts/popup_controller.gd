@@ -4,12 +4,12 @@ extends PanelContainer
 signal choice_made(outcome_data: Dictionary)
 
 @onready var scenario_image_view: TextureRect = $VBox/ScenarioImageView
-@onready var suriin_toggle_button: Button = $VBox/SuriinToggleButton
+@onready var suriin_toggle_button: TextureButton = $VBox/ChoiceHBox/SuriinToggleButton
 @onready var choice_hbox: HBoxContainer = $VBox/ChoiceHBox
 
 @onready var suriin_popup_panel: PanelContainer = $SuriinPopupPanel
 @onready var suriin_summary_label: Label = $SuriinPopupPanel/SuriinVBox/SummaryLabel
-@onready var suriin_highlight_label: Label = $SuriinPopupPanel/SuriinVBox/HighlightLabel
+@onready var suriin_highlight_label: Label = $SuriinPopupPanel/SuriinVBox/Highlightlabel
 @onready var suriin_clues_list: VBoxContainer = $SuriinPopupPanel/SuriinVBox/CluesList
 @onready var suriin_close_btn: Button = $SuriinPopupPanel/SuriinVBox/CloseBtn
 

@@ -34,8 +34,6 @@ extends Node2D
 @onready var kid_left: Sprite2D = $PeerKidsLayer/KidLeft
 @onready var kid_right: Sprite2D = $PeerKidsLayer/KidRight
 @onready var left_speech: Label = $PeerKidsLayer/KidLeft/SpeechBubble/Dialogue
-@onready var right_speech: Label = $PeerKidsLayer/KidRight/SpeechBubble/Dialogue
-
 # -------------------------------------------------------------------------
 # STATE VARIABLES
 # -------------------------------------------------------------------------
@@ -46,6 +44,8 @@ var current_scenario_index: int = 0
 
 var active_gacha_screen: Node = null
 var desktop_instance: Node = null # Holds the dynamically spawned desktop
+
+const PEER_PRESSURE_DELAY: float = 1.2 # time the kid's nag line stays up before the desktop pops up
 
 # -------------------------------------------------------------------------
 # LIFECYCLE
@@ -60,7 +60,6 @@ func _ready() -> void:
 	if ui_layer: ui_layer.visible = false
 	if level_end_screen: level_end_screen.visible = false
 	if left_speech: left_speech.visible = false
-	if right_speech: right_speech.visible = false
 
 	# 1. Instantiate the Desktop dynamically
 	_instantiate_desktop()
@@ -87,7 +86,9 @@ func _instantiate_desktop() -> void:
 		# Spawn the desktop and add it to the container
 		desktop_instance = desktop_scene.instantiate()
 		desktop_container.add_child(desktop_instance)
-		
+		# Hidden until a scenario is actually ready to be presented
+		desktop_container.visible = false
+
 		# Connect the signal from the new instance
 		if desktop_instance.has_signal("scenario_completed"):
 			desktop_instance.scenario_completed.connect(_on_scenario_completed)
@@ -96,14 +97,44 @@ func _instantiate_desktop() -> void:
 func _play_intro_transition() -> void:
 	is_timer_paused = true
 
-	if transition_player and transition_player.has_animation("fade_to_monitor"):
-		transition_player.play("fade_to_monitor")
-		await transition_player.animation_finished
-
 	if ui_layer: ui_layer.visible = true
 	is_timer_paused = false
 
 	_spawn_next_scenario()
+
+
+# -------------------------------------------------------------------------
+# SCENE TRANSITIONS (kids view <-> desktop view)
+# -------------------------------------------------------------------------
+func _fade_out() -> void:
+	if transition_player and transition_player.has_animation("fade_to_black"):
+		transition_player.play("fade_to_black")
+		await transition_player.animation_finished
+
+
+func _fade_in() -> void:
+	if transition_player and transition_player.has_animation("fade_to_black"):
+		transition_player.play_backwards("fade_to_black")
+		await transition_player.animation_finished
+
+
+func _show_desktop(scenario_data: Dictionary) -> void:
+	await _fade_out()
+
+	if left_speech: left_speech.visible = false
+	if desktop_instance and desktop_instance.has_method("spawn_scenario"):
+		desktop_instance.spawn_scenario(scenario_data)
+	if desktop_container: desktop_container.visible = true
+
+	await _fade_in()
+
+
+func _hide_desktop() -> void:
+	await _fade_out()
+
+	if desktop_container: desktop_container.visible = false
+
+	await _fade_in()
 
 # Called every frame.
 func _process(delta: float) -> void:
@@ -154,25 +185,27 @@ func _spawn_next_scenario() -> void:
 
 	var current_scenario = level_scenarios[current_scenario_index]
 
-	# Call spawn_scenario on the dynamically instanced desktop
-	if desktop_instance and desktop_instance.has_method("spawn_scenario"):
-		desktop_instance.spawn_scenario(current_scenario)
-		
+	# Kids nag on the shop scene first, speech bubble hidden until now
 	_play_peer_pressure(current_scenario)
+
+	await get_tree().create_timer(PEER_PRESSURE_DELAY).timeout
+
+	# Then transition into the desktop popup with the scenario + choices
+	await _show_desktop(current_scenario)
 
 
 func _on_scenario_completed(outcome_data: Dictionary) -> void:
 	current_scenario_index += 1
 	is_timer_paused = true
-	
-	if left_speech: left_speech.visible = false
-	if right_speech: right_speech.visible = false
-	
+
+	# Back to the kids scenario so Totoy/Kuya can react
+	await _hide_desktop()
+
 	_apply_totoy_reaction(outcome_data)
 
 	if kuya_overlay and kuya_overlay.has_method("show_feedback"):
 		kuya_overlay.show_feedback(outcome_data)
-	
+
 
 func _on_kuya_continue() -> void:
 	is_timer_paused = false
@@ -203,23 +236,16 @@ func _apply_totoy_reaction(outcome_data: Dictionary) -> void:
 
 func _play_peer_pressure(scenario_data: Dictionary) -> void:
 	if left_speech: left_speech.visible = false
-	if right_speech: right_speech.visible = false
-	
+
 	if not scenario_data.has("ambient"):
 		return
-		
+
 	var ambient_data: Dictionary = scenario_data["ambient"]
 	var bubble_text: String = ambient_data.get("speech_bubble", "")
-	var speaker: String = ambient_data.get("speaker", "")
-	
-	if speaker == "Kid at Unit 4":
-		if left_speech:
-			left_speech.text = bubble_text
-			left_speech.visible = true
-	elif speaker == "Kid at next PC":
-		if right_speech:
-			right_speech.text = bubble_text
-			right_speech.visible = true
+
+	if bubble_text != "" and left_speech:
+		left_speech.text = bubble_text
+		left_speech.visible = true
 
 # -------------------------------------------------------------------------
 # LEVEL END & TRANSITIONS

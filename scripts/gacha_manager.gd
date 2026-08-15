@@ -12,7 +12,7 @@ const PACK_COST: int = 20
 @onready var blind_pack_button: TextureButton = get_node_or_null("BlindPackButton")
 @onready var card_display_panel: Panel = get_node_or_null("CardDisplayPanel")
 @onready var card_image: TextureRect = get_node_or_null("CardDisplayPanel/CardImage")
-@onready var close_button: Button = get_node_or_null("CloseButton")
+@onready var close_button: Button = get_node_or_null("CardDisplayPanel/CloseButton")
 @onready var done_button: Button = get_node_or_null("DoneButton")
 
 # Loaded from res://data/gacha_cards.json (schema: {"cards": [{id, name, rarity, weight, ...}]})

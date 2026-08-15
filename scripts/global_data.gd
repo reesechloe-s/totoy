@@ -14,15 +14,22 @@ var unlocked_cards: Array[String] = []
 # Called when the node enters the scene tree for the first time.
 # check id and unlocked status
 func _ready() -> void:
-	# Ensure that the JsonLoader (an autoload) is placed above global data since it first needs to boot up before calling
+	# Default Level 1 to unlocked as a safety net
+	unlocked_levels[1] = true
+	
 	var all_data = JsonLoader.get_all_scenarios()
 	if all_data.is_empty() or not all_data.has("levels"):
 		push_error("GlobalData: failed to load scenario data; level unlock state will be empty.")
 		return
+		
 	for level_data in all_data["levels"]:
-		var level_id = level_data["id"]
-		var is_unlocked = level_data["unlocked"]
+		# Force conversion to int so dictionary lookup always matches int IDs
+		var level_id = int(level_data["id"])
+		var is_unlocked = bool(level_data["unlocked"])
 		unlocked_levels[level_id] = is_unlocked
+
+	# Re-verify level 1 stays unlocked
+	unlocked_levels[1] = true
 
 # we will only add barya, not subtract it. subtracting is only applicable to time
 func add_barya(amount: int) -> void:
@@ -52,6 +59,9 @@ func update_time(amount: float) -> void:
 # level progression
 ## to be called in level selection menu
 func is_level_unlocked(level_id: int) -> bool:
+	# Always return true for Level 1 regardless of dictionary missing keys
+	if level_id == 1:
+		return true
 	return unlocked_levels.get(level_id, false)
 
 ## when totoy beats a level, the next level shall be unlocked

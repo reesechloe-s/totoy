@@ -6,8 +6,10 @@ extends Control
 @onready var level_3_button: TextureButton = $WindowPanel/MainHBox/LevelSection/LevelGrid/Level3Button
 @onready var level_4_button: TextureButton = $WindowPanel/MainHBox/LevelSection/LevelGrid/Level4Button
 
+# Reference the new CloseButton node
+@onready var close_button: TextureButton = $WindowPanel/CloseButton
+
 func _ready() -> void:
-	# Locked levels show their padlock art automatically via the Disabled texture slot.
 	var level_buttons: Dictionary = {
 		1: level_1_button,
 		2: level_2_button,
@@ -17,10 +19,20 @@ func _ready() -> void:
 
 	for level_id in level_buttons:
 		var button: TextureButton = level_buttons[level_id]
-		button.disabled = not GlobalData.is_level_unlocked(level_id)
-		button.pressed.connect(_on_level_button_pressed.bind(level_id))
+		if button:
+			button.disabled = not GlobalData.is_level_unlocked(level_id)
+			button.pressed.connect(_on_level_button_pressed.bind(level_id))
+
+	# Connect Close Button signal
+	if close_button:
+		close_button.pressed.connect(_on_close_button_pressed)
 
 
 func _on_level_button_pressed(level_id: int) -> void:
 	GlobalData.current_level_id = level_id
 	get_tree().change_scene_to_file("res://scenes/core/main_game.tscn")
+
+
+func _on_close_button_pressed() -> void:
+	# Navigates back to opening menu
+	get_tree().change_scene_to_file("res://scenes/core/opening_menu.tscn")

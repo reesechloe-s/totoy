@@ -1,30 +1,41 @@
 [gd_scene format=3 uid="uid://c7pdobwkvoku"]
 
-[ext_resource type="Script" uid="uid://kyr4sjvftgbh" path="res://scripts/popup_controller.gd" id="1_8e4au"]
+[node name="PanelContainer" type="PanelContainer" unique_id=1847019588]
+offset_right = 1913.0
+offset_bottom = 1074.0
 
-[node name="PopupRoot" type="PanelContainer" unique_id=960634216]
-offset_right = 40.0
-offset_bottom = 40.0
-script = ExtResource("1_8e4au")
-
-[node name="VBox" type="VBoxContainer" parent="." unique_id=500524861]
+[node name="VBox" type="VBoxContainer" parent="." unique_id=1618348348]
 layout_mode = 2
 
-[node name="TitleLabel" type="Label" parent="VBox" unique_id=982835623]
+[node name="ScenarioImageView" type="TextureRect" parent="VBox" unique_id=1108169526]
 layout_mode = 2
 
-[node name="ContentBody" type="RichTextLabel" parent="VBox" unique_id=978538906]
+[node name="SuriinToggleButton" type="TextureButton" parent="VBox" unique_id=2113971779]
 layout_mode = 2
 
-[node name="InspectDetailsLabel" type="Label" parent="VBox" unique_id=781280880]
-visible = false
+[node name="ChoiceHBox" type="HBoxContainer" parent="VBox" unique_id=686912751]
 layout_mode = 2
 
-[node name="ChoiceHBox" type="HBoxContainer" parent="VBox" unique_id=258861552]
+[node name="Option1Btn" type="Button" parent="VBox/ChoiceHBox" unique_id=1219735123]
 layout_mode = 2
 
-[node name="Option1Btn" type="Button" parent="VBox/ChoiceHBox" unique_id=1439137403]
+[node name="Option2Btn" type="Button" parent="VBox/ChoiceHBox" unique_id=1379142887]
 layout_mode = 2
 
-[node name="Option2Btn" type="Button" parent="VBox/ChoiceHBox" unique_id=1688301108]
+[node name="SuriinPopupPanel" type="PanelContainer" parent="." unique_id=1988356953]
+layout_mode = 2
+
+[node name="SuriinVBox" type="VBoxContainer" parent="SuriinPopupPanel" unique_id=921643737]
+layout_mode = 2
+
+[node name="SummaryLabel" type="Label" parent="SuriinPopupPanel/SuriinVBox" unique_id=1601995056]
+layout_mode = 2
+
+[node name="Highlightlabel" type="Label" parent="SuriinPopupPanel/SuriinVBox" unique_id=1358163110]
+layout_mode = 2
+
+[node name="CluesList" type="VBoxContainer" parent="SuriinPopupPanel/SuriinVBox" unique_id=1574869806]
+layout_mode = 2
+
+[node name="CloseBtn" type="Button" parent="SuriinPopupPanel/SuriinVBox" unique_id=91705462]
 layout_mode = 2
